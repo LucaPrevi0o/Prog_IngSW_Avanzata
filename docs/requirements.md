@@ -28,7 +28,7 @@ Il client è una single-page application Angular; l'API JSON è realizzata in Ru
 | NFR-01 | Sicurezza | Le route protette richiedono un JWT valido (401); le route amministrative il ruolo `ADMIN` (403). Gli hash delle password non sono mai serializzati. |
 | NFR-02 | Configurazione | `.env.example` documenta `FRONTEND_ORIGIN` e `API_BASE_URL`; `make dev` applica entrambi in modo coerente. |
 | NFR-03 | Riproducibilità | Un clone pulito con `--recurse-submodules`, `.env`, `make setup` e `make dev` avvia lo stack locale. |
-| NFR-04 | Evidenza di qualità | Test backend e frontend, report di copertura, artefatti di build e risultati CI sono conservati come evidenza della consegna. |
+| NFR-04 | Evidenza di qualità | Test backend e frontend, report di copertura, artefatti di build e risultati CI sono conservati come evidenza della consegna. Il backend applica inizialmente soglie SimpleCov del 75% sulle linee e del 45% sui branch. |
 | NFR-05 | Distribuibilità | Lo stack di produzione è containerizzato con un'immagine Angular/Nginx e un'immagine Rails e può essere avviato dal Compose root. |
 
 ## Assunzioni ed esclusioni
