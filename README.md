@@ -92,14 +92,19 @@ non alterare il semplice flusso di lavoro locale.
 ## Comandi comuni
 
 ```bash
-make test             # Test unitari e di integrazione Rails
-make coverage-backend # Test Rails con report SimpleCov e soglie minime
-make build            # Build di produzione Angular
+make test-backend      # Test unitari e di integrazione Rails
+make coverage-backend  # Test Rails con report SimpleCov e soglie minime
+make test-frontend     # Test unitari Angular
+make coverage-frontend # Test Angular con report Vitest e soglie minime
+make build             # Build di produzione Angular
 ```
 
 Il comando di coverage produce il report HTML in `backend/coverage/index.html` e
 il risultato machine-readable in `backend/coverage/.resultset.json`. Le soglie
 iniziali sono 75% per le linee e 45% per i branch.
+
+Il report Vitest del frontend è in `frontend/coverage/` (HTML e `lcov.info`);
+le soglie iniziali sono 40% per le linee e 60% per i branch.
 
 I README del backend e del frontend contengono i comandi e i dettagli API
 specifici delle singole applicazioni. Documentazione trasversale, Docker Compose

@@ -1,13 +1,15 @@
 .DEFAULT_GOAL := help
 
-.PHONY: help setup dev test build coverage-backend
+.PHONY: help setup dev test-backend build coverage-backend test-frontend coverage-frontend
 
 help:
 	@printf '%s\n' 'Available commands:' \
 	  '  make setup  Install frontend and backend dependencies, then prepare the database.' \
 	  '  make dev    Run the Rails API and Angular development server together (reads .env).' \
-	  '  make test   Run the backend test suite.' \
+	  '  make test-backend  Run the backend test suite.' \
 	  '  make coverage-backend  Run backend tests with enforced SimpleCov thresholds.' \
+	  '  make test-frontend  Run Angular unit tests once.' \
+	  '  make coverage-frontend  Run Angular tests with Vitest coverage thresholds.' \
 	  '  make build  Create the Angular production build.'
 
 setup:
@@ -23,11 +25,17 @@ dev:
 	trap 'kill $$backend_pid $$frontend_pid 2>/dev/null || true' INT TERM EXIT; \
 	wait $$backend_pid $$frontend_pid
 
-test:
+test-backend:
 	cd backend && bundle exec rails test
 
 coverage-backend:
 	cd backend && COVERAGE=true bundle exec rails test
+
+test-frontend:
+	cd frontend && npm test -- --watch=false
+
+coverage-frontend:
+	cd frontend && npm run test:ci
 
 build:
 	cd frontend && npm run build
