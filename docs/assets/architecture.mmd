@@ -1,0 +1,39 @@
+flowchart LR
+  Browser(("Browser"))
+
+  subgraph Frontend["Frontend — Angular SPA"]
+    direction TD
+    UI["Componenti e pagine"]
+    Client["Servizi Angular"]
+    Security["Interceptor JWT e route guards"]
+
+    UI -->|azione dell'utente| Client
+    Security -.->|protegge la navigazione| UI
+    Security -->|aggiunge il Bearer JWT| Client
+  end
+
+  subgraph Backend["Backend — Ruby on Rails API-only"]
+    API["API JSON e controller"]
+    Auth["Autenticazione e autorizzazione"]
+    Domain["Servizi di dominio"]
+    Models["Modelli e validazioni"]
+
+    API -->|delega il caso d'uso| Domain
+    API -->|registrazione e login| Auth
+    Auth -.->|valida token e ruolo| API
+    Domain -->|applica regole e transazioni| Models
+  end
+
+  Browser -->|carica la SPA| UI
+  Client -->|REST/JSON e Bearer JWT| API
+  Auth -->|JWT nella risposta JSON| Client
+  Models -->|lettura e scrittura| SQLite[("SQLite")]
+
+  subgraph Delivery["Qualità e distribuzione"]
+    CI["GitHub Actions"]
+    Compose["Docker Compose"]
+  end
+
+  CI -.->|verifica frontend| UI
+  CI -.->|verifica backend| API
+  CI -->|valida configurazione e build immagini| Compose

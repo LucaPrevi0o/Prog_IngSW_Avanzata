@@ -39,12 +39,13 @@ I prezzi dei prodotti sono valori numerici assimilabili a EUR e lo stock è gest
 
 ```mermaid
 flowchart LR
-  Browser -->|HTTP| Angular[SPA Angular]
+  Browser[Browser] --> Angular[Angular SPA]
   Angular -->|JSON + JWT| Rails[API Rails]
   Rails --> SQLite[(SQLite)]
-  CI[Root GitHub Actions] --> Angular
+  JWT[JWT e autorizzazione] -. protegge .-> Rails
+  CI[GitHub Actions] --> Angular
   CI --> Rails
-  CI --> Compose[Compose image validation]
+  CI ---> Compose[Docker Compose]
 ```
 
 Le risorse dati centrali sono `users`, `products`, `carts`/`cart_items`, `orders`/`order_items` e gli snapshot di profilo/pagamento. Le route API pubbliche coprono registrazione, login e lettura del catalogo. Il JWT protegge gli endpoint di profilo, carrello e ordini; `/admin/*` richiede inoltre il ruolo di amministratore. L'API serializza JSON con contratti camelCase utilizzati da Angular.
@@ -62,7 +63,7 @@ Le risorse dati centrali sono `users`, `products`, `carts`/`cart_items`, `orders
 
 ## Evidenze della consegna e struttura della relazione
 
-Conservare i report di copertura HTML/leggibili dalla macchina, una run CI root riuscita e una cattura del terminale che mostri l'avvio dello stack containerizzato e il funzionamento del flusso principale. Il workflow root `Master CI` produce gli artefatti `backend-coverage` e `frontend-evidence`: la [run 29488855352](https://github.com/LucaPrevi0o/Prog_IngSW_Avanzata/actions/runs/29488855352) è l'evidenza verde di riferimento sul commit master corrente. I risultati misurati e la procedura di raccolta sono riportati in [evidence.md](evidence.md). Presentare il lavoro nel seguente ordine:
+Conservare i report di copertura HTML/leggibili dalla macchina, una run CI root riuscita e una cattura del terminale che mostri l'avvio dello stack containerizzato e il funzionamento del flusso principale. Il workflow root `Master CI` produce gli artefatti `backend-coverage` e `frontend-evidence`: la [run 29488855352](https://github.com/LucaPrevi0o/Prog_IngSW_Avanzata/actions/runs/29488855352) è l'evidenza verde di riferimento sul commit master corrente. I risultati misurati e la procedura di raccolta sono riportati in [evidence.md](evidence.md); una scaletta pronta per relazione o slide è in [presentation.md](presentation.md). Presentare il lavoro nel seguente ordine:
 
 1. Complessità del progetto e attori.
 2. Architettura, modello dati e confini API.

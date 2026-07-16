@@ -1,0 +1,8 @@
+flowchart LR
+  Browser[Browser :8080] --> Nginx[Nginx + Angular]
+  Nginx -->|/api| Rails[Rails :80]
+  subgraph Database
+  direction LR
+    SQLite[(SQLite)] --- Volume[(backend_storage)]
+  end
+  Rails --> Database
