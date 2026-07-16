@@ -62,7 +62,7 @@ Le risorse dati centrali sono `users`, `products`, `carts`/`cart_items`, `orders
 
 ## Evidenze della consegna e struttura della relazione
 
-Conservare i report di copertura HTML/leggibili dalla macchina, una run CI root riuscita e una cattura del terminale che mostri l'avvio dello stack containerizzato e il funzionamento del flusso principale. Il workflow root `Master CI` produce gli artefatti `backend-coverage` e `frontend-evidence`: la [run 29488855352](https://github.com/LucaPrevi0o/Prog_IngSW_Avanzata/actions/runs/29488855352) è l'evidenza verde di riferimento sul commit master corrente. Presentare il lavoro nel seguente ordine:
+Conservare i report di copertura HTML/leggibili dalla macchina, una run CI root riuscita e una cattura del terminale che mostri l'avvio dello stack containerizzato e il funzionamento del flusso principale. Il workflow root `Master CI` produce gli artefatti `backend-coverage` e `frontend-evidence`: la [run 29488855352](https://github.com/LucaPrevi0o/Prog_IngSW_Avanzata/actions/runs/29488855352) è l'evidenza verde di riferimento sul commit master corrente. I risultati misurati e la procedura di raccolta sono riportati in [evidence.md](evidence.md). Presentare il lavoro nel seguente ordine:
 
 1. Complessità del progetto e attori.
 2. Architettura, modello dati e confini API.
