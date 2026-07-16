@@ -124,6 +124,24 @@ vuole eliminare esplicitamente anche i dati persistenti.
 Per validare la dimostrazione d'esame, registrare un cliente, aggiungere un
 prodotto al carrello e completare il checkout dall'interfaccia containerizzata.
 
+## Continuous integration
+
+Il workflow root **Master CI** viene eseguito su push e pull request verso
+`main`/`master`, incluse le modifiche ai puntatori dei sottomoduli. Effettua il
+checkout ricorsivo e crea tre evidenze indipendenti:
+
+- backend: database, RuboCop, Brakeman, Bundler Audit, test e SimpleCov;
+- frontend: installazione, lint se configurato, type-check, test Vitest con
+  coverage e build di produzione;
+- container: validazione di `docker compose config` e build delle due immagini.
+
+I report di coverage e la build frontend sono caricati come artefatti della run.
+Il workflow backend autonomo è stato allineato agli stessi controlli: non usa più
+gli inesistenti comandi `bin/importmap audit` o `test:system`.
+Il submodule frontend dispone inoltre di **Frontend CI**, che applica gli stessi
+controlli a ogni push o pull request nel suo repository prima
+dell'aggiornamento del puntatore nel master.
+
 I README del backend e del frontend contengono i comandi e i dettagli API
 specifici delle singole applicazioni. Documentazione trasversale, Docker Compose
 e CI risiedono nel repository master; codice applicativo e test restano nei
