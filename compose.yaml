@@ -1,0 +1,32 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    environment:
+      RAILS_ENV: production
+      RAILS_LOG_TO_STDOUT: "true"
+      RAILS_SERVE_STATIC_FILES: "true"
+      FRONTEND_ORIGIN: http://localhost:${COMPOSE_FRONTEND_PORT:-8080}
+      # Local Compose only: replace with a managed secret for a real deployment.
+      SECRET_KEY_BASE: compose-development-secret-not-for-production
+    volumes:
+      - backend_storage:/rails/storage
+    ports:
+      - "${COMPOSE_BACKEND_PORT:-3000}:80"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost/up >/dev/null"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+
+  frontend:
+    build:
+      context: ./frontend
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "${COMPOSE_FRONTEND_PORT:-8080}:80"
+
+volumes:
+  backend_storage:

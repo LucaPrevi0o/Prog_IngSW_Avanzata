@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-.PHONY: help setup dev test-backend build coverage-backend test-frontend coverage-frontend
+.PHONY: help setup dev test-backend build coverage-backend test-frontend coverage-frontend compose-up compose-down
 
 help:
 	@printf '%s\n' 'Available commands:' \
@@ -10,6 +10,8 @@ help:
 	  '  make coverage-backend  Run backend tests with enforced SimpleCov thresholds.' \
 	  '  make test-frontend  Run Angular unit tests once.' \
 	  '  make coverage-frontend  Run Angular tests with Vitest coverage thresholds.' \
+	  '  make compose-up  Build and start the complete containerized stack.' \
+	  '  make compose-down  Stop the containerized stack.' \
 	  '  make build  Create the Angular production build.'
 
 setup:
@@ -36,6 +38,12 @@ test-frontend:
 
 coverage-frontend:
 	cd frontend && npm run test:ci
+
+compose-up:
+	docker compose up --build
+
+compose-down:
+	docker compose down
 
 build:
 	cd frontend && npm run build

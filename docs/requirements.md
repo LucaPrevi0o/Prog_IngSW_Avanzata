@@ -29,7 +29,7 @@ Il client è una single-page application Angular; l'API JSON è realizzata in Ru
 | NFR-02 | Configurazione | `.env.example` documenta `FRONTEND_ORIGIN` e `API_BASE_URL`; `make dev` applica entrambi in modo coerente. |
 | NFR-03 | Riproducibilità | Un clone pulito con `--recurse-submodules`, `.env`, `make setup` e `make dev` avvia lo stack locale. |
 | NFR-04 | Evidenza di qualità | Test backend e frontend, report di copertura, artefatti di build e risultati CI sono conservati come evidenza della consegna. Il backend applica inizialmente soglie SimpleCov del 75% sulle linee e del 45% sui branch; il frontend applica soglie Vitest del 40% sulle linee e del 60% sui branch. |
-| NFR-05 | Distribuibilità | Lo stack di produzione è containerizzato con un'immagine Angular/Nginx e un'immagine Rails e può essere avviato dal Compose root. |
+| NFR-05 | Distribuibilità | Lo stack è containerizzato con un'immagine Angular/Nginx multi-stage e un'immagine Rails e può essere avviato con `docker compose up --build`. Nginx inoltra `/api` a Rails e il volume `backend_storage` conserva SQLite. |
 
 ## Assunzioni ed esclusioni
 

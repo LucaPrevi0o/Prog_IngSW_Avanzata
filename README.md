@@ -106,6 +106,24 @@ iniziali sono 75% per le linee e 45% per i branch.
 Il report Vitest del frontend è in `frontend/coverage/` (HTML e `lcov.info`);
 le soglie iniziali sono 40% per le linee e 60% per i branch.
 
+## Stack containerizzato
+
+L'intera applicazione si avvia dal master repository con Docker Compose:
+
+```bash
+cp .env.example .env
+docker compose up --build
+```
+
+L'interfaccia è disponibile su <http://localhost:8080>; Nginx inoltra `/api`
+alla API Rails. L'API è esposta anche su <http://localhost:3000> per il debug.
+Il volume `backend_storage` conserva il database SQLite tra i riavvii. Per
+arrestare lo stack usare `docker compose down`; aggiungere `-v` solo quando si
+vuole eliminare esplicitamente anche i dati persistenti.
+
+Per validare la dimostrazione d'esame, registrare un cliente, aggiungere un
+prodotto al carrello e completare il checkout dall'interfaccia containerizzata.
+
 I README del backend e del frontend contengono i comandi e i dettagli API
 specifici delle singole applicazioni. Documentazione trasversale, Docker Compose
 e CI risiedono nel repository master; codice applicativo e test restano nei
