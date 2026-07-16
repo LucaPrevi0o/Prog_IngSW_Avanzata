@@ -5,7 +5,7 @@
 help:
 	@printf '%s\n' 'Available commands:' \
 	  '  make setup  Install frontend and backend dependencies, then prepare the database.' \
-	  '  make dev    Run the Rails API and Angular development server together.' \
+	  '  make dev    Run the Rails API and Angular development server together (reads .env).' \
 	  '  make test   Run the backend test suite.' \
 	  '  make build  Create the Angular production build.'
 
@@ -16,6 +16,7 @@ setup:
 dev:
 	@set -e; \
 	if [ -f .env ]; then set -a; . ./.env; set +a; fi; \
+	(cd frontend && API_BASE_URL="$${API_BASE_URL:-http://localhost:3000}" node scripts/write-runtime-config.mjs); \
 	(cd backend && FRONTEND_ORIGIN="$${FRONTEND_ORIGIN:-http://localhost:4200}" bin/rails server) & backend_pid=$$!; \
 	(cd frontend && npm start) & frontend_pid=$$!; \
 	trap 'kill $$backend_pid $$frontend_pid 2>/dev/null || true' INT TERM EXIT; \
