@@ -11,7 +11,7 @@ proprio repository Git.
 .
 ├── backend/       API Ruby on Rails (sottomodulo Git)
 ├── frontend/      Applicazione Angular (sottomodulo Git)
-├── docs/          Specifica di progetto e materiale per l'esame (aggiunti durante il progetto)
+├── docs/          Specifica e materiale trasversale per l'esame
 ├── .env.example   Modello di configurazione per lo sviluppo locale
 └── Makefile       Comandi di sviluppo comuni
 ```
@@ -82,9 +82,10 @@ sviluppo Angular.
 | Impostazione | Valore predefinito | Scopo |
 | --- | --- | --- |
 | `FRONTEND_ORIGIN` | `http://localhost:4200` | Origine che Rails autorizza tramite CORS. |
-| `API_BASE_URL` in `frontend/src/app/app.config.ts` | `http://localhost:3000` | URL dell'API compilato nell'applicazione Angular. |
+| `API_BASE_URL` | `http://localhost:3000` | URL dell'API Angular, scritto da `make dev` nel runtime config locale. |
 
-Durante lo sviluppo locale questi valori devono corrispondere fra loro. Le
+Durante lo sviluppo locale questi valori devono corrispondere fra loro. `.env`
+non va commesso: `.env.example` è l'unica fonte dei valori predefiniti. Le
 impostazioni per container e produzione saranno definite separatamente, così da
 non alterare il semplice flusso di lavoro locale.
 
@@ -96,8 +97,13 @@ make build    # Build di produzione Angular
 ```
 
 I README del backend e del frontend contengono i comandi e i dettagli API
-specifici delle singole applicazioni. Documentazione trasversale, CI, copertura
-dei test e definizioni dei container risiederanno in questo repository master.
+specifici delle singole applicazioni. Documentazione trasversale, Docker Compose
+e CI risiedono nel repository master; codice applicativo e test restano nei
+rispettivi sottomoduli.
+
+La [specifica del progetto](docs/requirements.md) contiene requisiti con ID,
+criteri di accettazione, tracciabilità verso implementazione/test/CI, diagramma
+architetturale, panoramica dati/API e scaletta per la presentazione d'esame.
 
 ## Flusso di lavoro con i sottomoduli Git
 
