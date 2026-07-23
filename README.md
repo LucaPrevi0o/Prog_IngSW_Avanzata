@@ -83,11 +83,18 @@ sviluppo Angular.
 | --- | --- | --- |
 | `FRONTEND_ORIGIN` | `http://localhost:4200` | Origine che Rails autorizza tramite CORS. |
 | `API_BASE_URL` | `http://localhost:3000` | URL dell'API Angular, scritto da `make dev` nel runtime config locale. |
+| `SEED_ADMIN_EMAIL` | `admin@example.com` | Email dell'amministratore locale creato dal seed. |
+| `SEED_ADMIN_PASSWORD` | `secret123` | Password dell'amministratore locale creato dal seed. |
 
 Durante lo sviluppo locale questi valori devono corrispondere fra loro. `.env`
 non va commesso: `.env.example` è l'unica fonte dei valori predefiniti. Le
 impostazioni per container e produzione saranno definite separatamente, così da
 non alterare il semplice flusso di lavoro locale.
+
+`make setup` prepara anche l'amministratore di dimostrazione indicato sopra. Il
+seed è idempotente: promuove l'account configurato a `ADMIN`, ma non ne
+sovrascrive una password esistente. Le credenziali predefinite sono adatte solo
+allo sviluppo locale e vanno sostituite in un ambiente reale.
 
 ## Comandi comuni
 

@@ -15,7 +15,9 @@ help:
 	  '  make build  Create the Angular production build.'
 
 setup:
-	cd backend && bundle install && bin/rails db:prepare
+	@set -e; \
+	if [ -f .env ]; then set -a; . ./.env; set +a; fi; \
+	(cd backend && export SEED_ADMIN_EMAIL="$${SEED_ADMIN_EMAIL:-admin@example.com}" SEED_ADMIN_PASSWORD="$${SEED_ADMIN_PASSWORD:-secret123}"; bundle install && bin/rails db:prepare)
 	cd frontend && npm ci
 
 dev:

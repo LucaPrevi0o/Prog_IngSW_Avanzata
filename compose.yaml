@@ -7,6 +7,8 @@ services:
       RAILS_LOG_TO_STDOUT: "true"
       RAILS_SERVE_STATIC_FILES: "true"
       FRONTEND_ORIGIN: http://localhost:${COMPOSE_FRONTEND_PORT:-8080}
+      SEED_ADMIN_EMAIL: ${SEED_ADMIN_EMAIL:-admin@example.com}
+      SEED_ADMIN_PASSWORD: ${SEED_ADMIN_PASSWORD:-secret123}
       # Local Compose only: replace with a managed secret for a real deployment.
       SECRET_KEY_BASE: compose-development-secret-not-for-production
     volumes:
